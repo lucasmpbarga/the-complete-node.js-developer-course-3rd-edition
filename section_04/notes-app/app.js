@@ -1,3 +1,4 @@
+const { argv, string } = require("yargs");
 const yargs = require("yargs");
 
 yargs.version("7.7.7");
@@ -8,8 +9,21 @@ yargs.version("7.7.7");
 yargs.command({
   command: "add",
   describe: "add a new note",
-  handler: function () {
-    console.log("adding a new note!");
+  builder: {
+    title: {
+      desbribe: "Note title",
+      demandOption: true,
+      type: string,
+    },
+    body: {
+      desbribe: "Note body",
+      demandOption: true,
+      type: string,
+    },
+  },
+  handler: function (argv) {
+    console.log("Title:", argv.title);
+    console.log("Body:", argv.body);
   },
 });
 
@@ -40,4 +54,4 @@ yargs.command({
   },
 });
 
-console.log(yargs.argv);
+yargs.parse();
