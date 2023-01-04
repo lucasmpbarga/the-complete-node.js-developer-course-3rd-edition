@@ -1,5 +1,6 @@
 const { argv, string } = require("yargs");
 const yargs = require("yargs");
+const notes = require("./notes");
 
 yargs.version("7.7.7");
 
@@ -22,8 +23,7 @@ yargs.command({
     },
   },
   handler: function (argv) {
-    console.log("Title:", argv.title);
-    console.log("Body:", argv.body);
+    notes.addNote(argv.title, argv.body)
   },
 });
 
