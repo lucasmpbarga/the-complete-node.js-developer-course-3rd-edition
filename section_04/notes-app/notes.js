@@ -36,7 +36,20 @@ const addNote = (title, body) => {
   }
 };
 
+const removeNote = (title) => {
+  const notes = loadNotes();
+  const noteIndex = notes.findIndex((note) => note.title === title);
+
+  if (noteIndex > -1) {
+    notes.splice(noteIndex, 1);
+    saveNotes(notes);
+  } else {
+    console.log("Note doesn't exist!");
+  }
+};
+
 module.exports = {
   getNotes,
   addNote,
+  removeNote,
 };
