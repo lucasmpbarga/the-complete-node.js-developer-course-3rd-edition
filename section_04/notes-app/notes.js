@@ -1,9 +1,6 @@
 const { constants } = require("buffer");
 const fs = require("fs");
-
-const getNotes = () => {
-  return "Your notes...";
-};
+const chalk = require("chalk");
 
 const loadNotes = () => {
   try {
@@ -31,8 +28,10 @@ const addNote = (title, body) => {
     });
 
     saveNotes(notes);
+
+    console.log(chalk.green.inverse("Note added!"));
   } else {
-    console.log("Note title taken!");
+    console.log(chalk.red.inverse("Note title taken!"));
   }
 };
 
@@ -42,14 +41,27 @@ const removeNote = (title) => {
 
   if (noteIndex > -1) {
     notes.splice(noteIndex, 1);
+
     saveNotes(notes);
+
+    console.log(chalk.green.inverse("Note removed!"));
   } else {
-    console.log("Note doesn't exist!");
+    console.log(chalk.red.inverse("Note doesn't exist!"));
   }
 };
 
+const listNotes = () => {
+  const notes = loadNotes();
+
+  console.log(chalk.inverse("Your notes:"));
+
+  notes.forEach((note) => {
+    console.log(note.title);
+  });
+};
+
 module.exports = {
-  getNotes,
   addNote,
   removeNote,
+  listNotes,
 };
