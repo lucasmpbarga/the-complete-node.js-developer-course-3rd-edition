@@ -53,6 +53,8 @@ const removeNote = (title) => {
 const listNotes = () => {
   const notes = loadNotes();
 
+  debugger;
+
   console.log(chalk.inverse("Your notes:"));
 
   notes.forEach((note) => {
